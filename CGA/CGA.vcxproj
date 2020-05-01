@@ -145,6 +145,7 @@
     <ClCompile Include="Origem.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="PreProcessamento.cpp" />
+    <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayCastRender.cpp" />
     <ClCompile Include="RayTracingRender.cpp" />
     <ClCompile Include="Render.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="PreProcessamento.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="RayCastRender.h" />
     <ClInclude Include="RayTracingRender.h" />
     <ClInclude Include="Render.h" />
