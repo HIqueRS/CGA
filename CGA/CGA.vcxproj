@@ -141,6 +141,8 @@
     <ClCompile Include="BlurFilter.cpp" />
     <ClCompile Include="ConvolutionFilter.cpp" />
     <ClCompile Include="Filtro.cpp" />
+    <ClCompile Include="Hitable.cpp" />
+    <ClCompile Include="Hitable_List.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Origem.cpp" />
     <ClCompile Include="Output.cpp" />
@@ -153,12 +155,15 @@
     <ClCompile Include="SceneView.cpp" />
     <ClCompile Include="SceneWriter.cpp" />
     <ClCompile Include="SharpenFilter.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlurFilter.h" />
     <ClInclude Include="ConvolutionFilter.h" />
     <ClInclude Include="Filtro.h" />
+    <ClInclude Include="Hitable.h" />
+    <ClInclude Include="Hitable_List.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="PreProcessamento.h" />
@@ -170,6 +175,7 @@
     <ClInclude Include="SceneView.h" />
     <ClInclude Include="SceneWriter.h" />
     <ClInclude Include="SharpenFilter.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
