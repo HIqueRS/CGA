@@ -9,18 +9,16 @@ void Output::OutputImage()
 {
 	int nx = 200;
 	int ny = 100;
+	int ns = 100;
 	outFile.open("test.ppm");
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
-	outFile << "P3\n" << nx << " " << ny << "\n255\n";
-	Vec3 lower_left_corner(-2.0, -1.0, -1.0);
-	Vec3 horizontal(4.0, 0.0, 0.0);
-	Vec3 vertical(0.0, 2.0, 0.0);
-	Vec3 origin(0.0, 0.0, 0.0);
+	outFile << "P3\n" << nx << " " << ny << "\n255\n";	
 
 	Hitable* list[2];
 	list[0] = new Sphere(Vec3(0, 0, -1), 0.5);
 	list[1] = new Sphere(Vec3(0, -100.5, -1), 100);
 	Hitable_List* world = new Hitable_List(list, 2);
+	Camera cam;
 
 	//Hitable_List a;
 
@@ -28,15 +26,23 @@ void Output::OutputImage()
 	{
 		for (int i = 0; i < nx; i++)
 		{
-			float u = float(i) / float(nx);
-			float v = float(j) / float(ny);
-			Ray r(origin, lower_left_corner + u * horizontal + v * vertical);
-			Vec3 col = Color(r,world);
-			
+			Vec3 col(0, 0, 0);
+			for (int s = 0; s < ns; s++)
+			{
+				
+				float u = float(i+Randinho() ) / float(nx);
+				float v = float(j + Randinho()) / float(ny);
+				Ray r = cam.Get_ray(u,v);
+				Vec3 p = r.Point_At_Parameter(2.0);
+				col += Color(r,world);
+
+			}
+			col /= float(ns);
 			int ir = int(255.99 * col[0]);
 			int ig = int(255.99 * col[1]);
 			int ib = int(255.99 * col[2]);
-			std::cout << ir << " " << ig << " " << ib << "\n";
+			//std::cout << ir << " " << ig << " " << ib << "\n";
+			std::cout << Randinho() <<std::endl;
 			outFile << ir << " " << ig << " " << ib << "\n";
 		}
 	}
@@ -63,6 +69,13 @@ float Output::Hit_Sphere(const Vec3& center, float radius, const Ray& r)
 		float test = sqrt(discriminant);
 		return (-b - test) / (2.0 * a);
 	}	
+}
+
+float Output::Randinho()
+{
+	rand_s(&rng);
+
+	return (double)rng /((double)UINT_MAX + 1) * 1 ;
 }
 
 Vec3 Output::Color(const Ray& r,Hitable *world)

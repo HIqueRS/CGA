@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_RAND_S 
 #include <iostream>
 #include <fstream>
 #include "Vec3.h"
@@ -7,6 +8,11 @@
 #include <float.h>
 #include <cfloat>
 #include "Sphere.h"
+#include "Camera.h"
+#include <random>
+#include <stdlib.h>
+#include <stdio.h>  
+#include <limits.h> 
 class Output
 {
 public:
@@ -16,8 +22,9 @@ protected:
 	void OutputImage();
 	Vec3 Color(const Ray& r, Hitable* world);
 	float Hit_Sphere(const Vec3& center, float radius, const Ray& r);
+	float Randinho();
 
 	std::ofstream outFile;
-
+	unsigned int rng;
 };
 

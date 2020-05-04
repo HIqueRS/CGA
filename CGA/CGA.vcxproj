@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BlurFilter.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConvolutionFilter.cpp" />
     <ClCompile Include="Filtro.cpp" />
     <ClCompile Include="Hitable.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlurFilter.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="ConvolutionFilter.h" />
     <ClInclude Include="Filtro.h" />
     <ClInclude Include="Hitable.h" />
