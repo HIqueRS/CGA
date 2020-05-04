@@ -11,7 +11,7 @@ void Output::OutputImage()
 	int ny = 100;
 	int ns = 100;
 	outFile.open("test.ppm");
-	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
+	//std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 	outFile << "P3\n" << nx << " " << ny << "\n255\n";	
 
 	Hitable* list[2];
@@ -38,11 +38,12 @@ void Output::OutputImage()
 
 			}
 			col /= float(ns);
+			col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
 			int ir = int(255.99 * col[0]);
 			int ig = int(255.99 * col[1]);
 			int ib = int(255.99 * col[2]);
 			//std::cout << ir << " " << ig << " " << ib << "\n";
-			std::cout << Randinho() <<std::endl;
+			//std::cout << Randinho() <<std::endl;
 			outFile << ir << " " << ig << " " << ib << "\n";
 		}
 	}
@@ -78,12 +79,22 @@ float Output::Randinho()
 	return (double)rng /((double)UINT_MAX + 1) * 1 ;
 }
 
+Vec3 Output::Random_in_unit_sphere()
+{
+	Vec3 p;
+	do{
+		p = 2.0 * Vec3(Randinho(), Randinho(), Randinho()) - Vec3(1, 1, 1);
+	} while (p.squared_length() >= 1.0);
+	return p;
+}
+
 Vec3 Output::Color(const Ray& r,Hitable *world)
 {
 	Hit_Record rec;
-	if (world->Hit(r, 0.0, FLT_MAX, rec))
+	if (world->Hit(r, 0.001, FLT_MAX, rec))
 	{
-		return 0.5 * Vec3(rec.normal.x() + 1, rec.normal.y() + 1, rec.normal.z() + 1);
+		Vec3 target = rec.p + rec.normal + Random_in_unit_sphere();
+		return 0.5 * Color(Ray (rec.p,target-rec.p),world);
 	}
 	else
 	{

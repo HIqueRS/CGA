@@ -23,6 +23,7 @@ protected:
 	Vec3 Color(const Ray& r, Hitable* world);
 	float Hit_Sphere(const Vec3& center, float radius, const Ray& r);
 	float Randinho();
+	Vec3 Random_in_unit_sphere();
 
 	std::ofstream outFile;
 	unsigned int rng;
