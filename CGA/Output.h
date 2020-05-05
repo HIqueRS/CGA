@@ -12,7 +12,9 @@
 #include <random>
 #include <stdlib.h>
 #include <stdio.h>  
-#include <limits.h> 
+#include <limits.h>
+#include "RandomTest.h"
+#include "Material.h"
 class Output
 {
 public:
@@ -20,12 +22,13 @@ public:
 
 protected:
 	void OutputImage();
-	Vec3 Color(const Ray& r, Hitable* world);
+	Vec3 Color(const Ray& r, Hitable* world, int depth);
 	float Hit_Sphere(const Vec3& center, float radius, const Ray& r);
-	float Randinho();
-	Vec3 Random_in_unit_sphere();
+	//float Randinho();
+	//Vec3 Random_in_unit_sphere();
 
 	std::ofstream outFile;
 	unsigned int rng;
+	RandomTest rndt;
 };
 

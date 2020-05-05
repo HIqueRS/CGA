@@ -1,5 +1,6 @@
 #pragma once
 #include "Hitable.h"
+#include "RandomTest.h"
 class Hitable_List : public Hitable
 {
 public:
@@ -8,6 +9,7 @@ public:
 	virtual bool Hit(const Ray& r, float t_min, float t_max, Hit_Record& rec) const;
 	Hitable** list;
 	int list_size;
+	RandomTest rngt;
 
 };
 

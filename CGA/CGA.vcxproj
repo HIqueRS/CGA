@@ -145,9 +145,13 @@
     <ClCompile Include="Hitable.cpp" />
     <ClCompile Include="Hitable_List.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Lambertian.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Metal.cpp" />
     <ClCompile Include="Origem.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="PreProcessamento.cpp" />
+    <ClCompile Include="RandomTest.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayCastRender.cpp" />
     <ClCompile Include="RayTracingRender.cpp" />
@@ -167,8 +171,12 @@
     <ClInclude Include="Hitable.h" />
     <ClInclude Include="Hitable_List.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Lambertian.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Metal.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="PreProcessamento.h" />
+    <ClInclude Include="RandomTest.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayCastRender.h" />
     <ClInclude Include="RayTracingRender.h" />
