@@ -24,7 +24,7 @@ void Output::OutputImage()
 
 	list[2] = new Sphere(Vec3(1, 0, -1), 0.5, new Metal(Vec3(0.8, 0.6, 0.2),0.3));
 
-	list[3] = new Sphere(Vec3(-1, 0, -1), 0.5, new Metal(Vec3(0.8, 0.8, 0.8),1.0));
+	list[3] = new Sphere(Vec3(-1, 0, -1), -0.45, new Dielectric(1.5));
 
 
 	Hitable_List* world = new Hitable_List(list, 4);

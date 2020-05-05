@@ -16,6 +16,7 @@
 #include "RandomTest.h"
 #include "Material.h"
 #include "Metal.h"
+#include "Dielectric.h"
 class Output
 {
 public:
