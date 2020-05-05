@@ -14,16 +14,20 @@ void Output::OutputImage()
 	//std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 	outFile << "P3\n" << nx << " " << ny << "\n255\n";	
 
-	Hitable* list[2];
+	Hitable* list[4];
 
-	Lambertian a = Lambertian(Vec3(0.8, 0.3, 0.3));
+	//Lambertian a = Lambertian(Vec3(0.8, 0.3, 0.3));
 	list[0] = new Sphere(Vec3(0, 0, -1), 0.5, new Lambertian(Vec3(0.8, 0.3, 0.3)));
 
 	//Lambertian b = new Lambertian(Vec3(0.8, 0.8, 0.0));
 	list[1] = new Sphere(Vec3(0, -100.5, -1), 100, new Lambertian(Vec3(0.8, 0.8, 0.0)));
 
+	list[2] = new Sphere(Vec3(1, 0, -1), 0.5, new Metal(Vec3(0.8, 0.6, 0.2),0.3));
 
-	Hitable_List* world = new Hitable_List(list, 2);
+	list[3] = new Sphere(Vec3(-1, 0, -1), 0.5, new Metal(Vec3(0.8, 0.8, 0.8),1.0));
+
+
+	Hitable_List* world = new Hitable_List(list, 4);
 	Camera cam;
 
 	//Hitable_List a;

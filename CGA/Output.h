@@ -15,6 +15,7 @@
 #include <limits.h>
 #include "RandomTest.h"
 #include "Material.h"
+#include "Metal.h"
 class Output
 {
 public:
