@@ -26,9 +26,10 @@ protected:
 	void OutputImage();
 	Vec3 Color(const Ray& r, Hitable* world, int depth);
 	float Hit_Sphere(const Vec3& center, float radius, const Ray& r);
-	Hitable_List* Random_scene();
+	//Hitable_List* Random_scene();
 	//float Randinho();
 	//Vec3 Random_in_unit_sphere();
+	Hitable_List* Random_scene();
 
 	std::ofstream outFile;
 	unsigned int rng;

@@ -7,8 +7,8 @@ void Output::execute()
 
 void Output::OutputImage()
 {
-	int nx = 200;
-	int ny = 100;
+	int nx = 1280;
+	int ny = 720;
 	int ns = 100;
 	outFile.open("test.ppm");
 	//std::cout << "P3\n" << nx << " " << ny << "\n255\n";
@@ -28,24 +28,26 @@ void Output::OutputImage()
 
 	list[2] = new Sphere(Vec3(1, 0, -1), 0.5, new Metal(Vec3(0.8, 0.6, 0.2),0.3));
 
-	list[3] = new Sphere(Vec3(-1, 0, -1), -0.45, new Dielectric(1.5));
+	list[3] = new Sphere(Vec3(-1, 0, -1), -0.5, new Dielectric(1.5));
 
 
 
 
-	Vec3 lookfrom(3, 3, 2);
+	Vec3 lookfrom(0, 4, 4);
 	Vec3 lookat(0, 0, -1);
 	float dist_to_focus = (lookfrom - lookat).length();
 	float aperture = 2.0;
 
 	//Camera cam(lookfrom, lookat, Vec3(0, 1, 0), 20, float(nx) / float(ny), aperture, dist_to_focus);
 	//Camera cam(90,float(nx)/float(ny));
-	Camera cam(Vec3(-2,2,1),Vec3(0,0,-1),Vec3(0,1,0),20,float(nx)/float(ny));
+	Camera cam(lookfrom,lookat,Vec3(0,1,0),50,float(nx)/float(ny));
 
 	Hitable_List* world = new Hitable_List(list, 4);
 	//Hitable_List* world = Random_scene();
 	//Hitable* blep = Random_scene();
 	//Hitable_List a;
+
+	world = Random_scene();
 
 	for (int j = ny - 1; j >= 0; j--)
 	{
@@ -99,27 +101,27 @@ float Output::Hit_Sphere(const Vec3& center, float radius, const Ray& r)
 
 Hitable_List* Output::Random_scene()
 {
-	int n = 500;//500;
-	Hitable** list = new Hitable*[n+1];
+	
+	int n = 500;
+	Hitable** list = new Hitable * [n + 1];
 	list[0] = new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(Vec3(0.5, 0.5, 0.5)));
-	RandomTest rngt2;
 	int i = 1;
+
 	for (int a = -11; a < 11; a++)
 	{
 		for (int b = -11; b < 11; b++)
 		{
-			float chose_mat = rngt2.Randinho();
-			Vec3 center(a + 0.9 * rngt2.Randinho(), 0.2, b + 0.9 * rngt2.Randinho());
+			float chose_mat = rndt.Randinho();
+			Vec3 center(a + 0.9 * rndt.Randinho(), 0.2, b + 0.9 * rndt.Randinho());
 			if ((center - Vec3(4, 0.2, 0)).length() > 0.9)
 			{
 				if (chose_mat < 0.8)
 				{
-					list[i++] = new Sphere(center, 0.2, new Lambertian(Vec3(rngt2.Randinho() * rngt2.Randinho(), rngt2.Randinho() * rngt2.Randinho(), rngt2.Randinho() * rngt2.Randinho())));
+					list[i++] = new Sphere(center, 0.2, new Lambertian(Vec3(rndt.Randinho() * rndt.Randinho(), rndt.Randinho() * rndt.Randinho(), rndt.Randinho() * rndt.Randinho())));
 				}
 				else if (chose_mat < 0.95)
 				{
-					list[i++] = new Sphere(center, 0.2,
-						new Metal(Vec3(0.5 * (1 + rngt2.Randinho()), 0.5 * (1 + rngt2.Randinho()), 0.5 * (1 + rngt2.Randinho())), 0.5 * rngt2.Randinho()));
+					list[i++] = new Sphere(center, 0.2, new Metal(Vec3(0.5 * (1 + rndt.Randinho()), 0.5 * (1 + rndt.Randinho()), 0.5 * (1 + rndt.Randinho())), 0.5 * rndt.Randinho()));
 				}
 				else
 				{
@@ -129,13 +131,52 @@ Hitable_List* Output::Random_scene()
 		}
 	}
 
-	list[i++] = new Sphere(Vec3(0, 1, 0), 1.0, new Dielectric(1.5));
-	list[i++] = new Sphere(Vec3(-4, 1, 0), 1.0, new Lambertian(Vec3(0.4, 0.2, 0.1)));
-	list[i++] = new Sphere(Vec3(4, 1, 0), 1.0, new Metal(Vec3(0.7, 0.6, 0.5),0.0));
-	
+	list[i++] = new Sphere(Vec3(-2, 1, 0), 1.0, new Dielectric(1.5));
+	list[i++] = new Sphere(Vec3(0, 1, 0), 1.0, new Lambertian(Vec3(0.0, 0.9, 0.9)));
+	list[i++] = new Sphere(Vec3(2, 1, 0), 1.0, new Metal(Vec3(0.7, 0.6, 0.5), 0.0));
 
 	return new Hitable_List(list,i);
 }
+
+//Hitable_List* Output::Random_scene()
+//{
+//	int n = 500;//500;
+//	Hitable** list = new Hitable*[n+1];
+//	list[0] = new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(Vec3(0.5, 0.5, 0.5)));
+//	RandomTest rngt2;
+//	int i = 1;
+//	for (int a = -11; a < 11; a++)
+//	{
+//		for (int b = -11; b < 11; b++)
+//		{
+//			float chose_mat = rngt2.Randinho();
+//			Vec3 center(a + 0.9 * rngt2.Randinho(), 0.2, b + 0.9 * rngt2.Randinho());
+//			if ((center - Vec3(4, 0.2, 0)).length() > 0.9)
+//			{
+//				if (chose_mat < 0.8)
+//				{
+//					list[i++] = new Sphere(center, 0.2, new Lambertian(Vec3(rngt2.Randinho() * rngt2.Randinho(), rngt2.Randinho() * rngt2.Randinho(), rngt2.Randinho() * rngt2.Randinho())));
+//				}
+//				else if (chose_mat < 0.95)
+//				{
+//					list[i++] = new Sphere(center, 0.2,
+//						new Metal(Vec3(0.5 * (1 + rngt2.Randinho()), 0.5 * (1 + rngt2.Randinho()), 0.5 * (1 + rngt2.Randinho())), 0.5 * rngt2.Randinho()));
+//				}
+//				else
+//				{
+//					list[i++] = new Sphere(center, 0.2, new Dielectric(1.5));
+//				}
+//			}
+//		}
+//	}
+//
+//	list[i++] = new Sphere(Vec3(0, 1, 0), 1.0, new Dielectric(1.5));
+//	list[i++] = new Sphere(Vec3(-4, 1, 0), 1.0, new Lambertian(Vec3(0.4, 0.2, 0.1)));
+//	list[i++] = new Sphere(Vec3(4, 1, 0), 1.0, new Metal(Vec3(0.7, 0.6, 0.5),0.0));
+//	
+//
+//	return new Hitable_List(list,i);
+//}
 
 Vec3 Output::Color(const Ray& r,Hitable *world, int depth)
 {
